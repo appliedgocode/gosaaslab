@@ -78,7 +78,7 @@ Finally, I'll add some logic for gracefully shutting down the server if the oper
 
 The following code uses the `os/signal` package to catch a SIGTERM signal. Function `signal.Notify()` sends a value through a channel once it receives a signal. 
 
-The code after the `Notify()` call waits on the channel before it calls the `Shutdown()` method from `net/http.Server` to close all listeners and idle connections and then wait *indefinitely* for active connections to return to idle. Well, indefinitely unless the context passed to it has a timeout. I add a 15-second timeout to be on the safe side for most connections (YYMV):
+The code after the `Notify()` call waits on the channel before it calls the `Shutdown()` method from `net/http.Server` to close all listeners and idle connections and then wait *indefinitely* for active connections to return to idle. Well, indefinitely unless the context passed to it has a timeout. I add a 15-second timeout to be on the safe side for most connections (YMMV):
 
 ```go 
 	stop := make(chan os.Signal, 1)
